@@ -1,0 +1,22 @@
+{
+    "name": "Vendor Self-Service Portal",
+    "summary": """Vendor Self-Service Portal""",
+    "category": "",
+    "version": "16.0.1.0.0",
+    "sequence": 2,
+    "author": "",
+    "license": "LGPL-3",
+    "website": "",
+    "description": """Vendor Self-Service Portal""",
+    "depends":['sale_management'],
+    "data": [
+      'security/ir.model.access.csv',
+      'views/vendor_forecast_view.xml',
+      'views/order_adjustment_request_view.xml',
+      'views/menu.xml',
+    ],
+    # "images": ['static/description/banner.gif'],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+}
