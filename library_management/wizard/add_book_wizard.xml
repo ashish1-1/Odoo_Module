@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="add_book_wizard_form" model="ir.ui.view">
+            <field name="name">add.book.wizard.form</field>
+            <field name="model">add.book.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                <group>
+                    <field name="book_ids" widget='many2many_tags'>
+                    </field>                    
+                </group>                    
+                    <footer>
+                        <button string="Added To Category" name="push" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Discard" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="add_book_wizard_action" model="ir.actions.act_window">
+            <field name="name">Add Books</field>
+            <field name="res_model">add.book.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+
+</odoo>

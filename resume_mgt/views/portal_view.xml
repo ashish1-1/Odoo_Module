@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_my_resume" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+            <t t-set="title">Resume</t>
+            <t t-set="url" t-value="'/my/resume/'" />
+            <t t-set="placeholder_count" t-value="'resume_count'"/>
+       </t>
+        </xpath>
+    </template>
+
+    <template id="portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'resume_list_view'" class="breadcrumb-item active ">Resume</li>
+            <li t-if="page_name == 'resume_form_view'" class="breadcrumb-item">
+                <a href="/my/resume">Resume</a>/<t t-esc="resume.name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="wb_resume_list_view_portal">
+        <t t-call="portal.portal_layout" >
+        <div class="container o_portal_sidebar" ></div>
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Resume</t>
+        </t>
+         <div class="container">
+            <a type="button" href="/resume/new_resume" class="btn btn-secondary my-3 float-end">Add New Resume</a>
+        </div>
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-center">Name</th>
+                        <th class="text-center">DOB</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Father's Name</th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="allresume" t-as="resume">
+                        <tr>
+                            <td class="text-center">
+                                <a t-attf-href="/resume/#{resume.id}">
+                                    <t t-out="resume.name" />
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <t t-out="resume.dob" />
+                            </td>
+                            <td class="text-center">
+                                <t t-out="resume.email" />
+                            </td>
+                            <td class="text-center">
+                                <t t-out="resume.father_name" />
+                            </td>
+
+                            <td class="text-center ">
+                            <t t-if="resume.status == 'approved'">
+                                <span class="badge rounded-pill text-bg-success" t-field="resume.status" />
+                            </t>
+                            
+                            <t t-if="resume.status == 'new'">
+                                <span class="badge rounded-pill text-bg-info" t-field="resume.status" />
+                            </t>
+
+                            <t t-if="resume.status == 'submitted'">
+                                <span class="badge rounded-pill text-bg-success" t-field="resume.status" />
+                            </t>
+                            <t t-if="resume.status == 'published'">
+                                <span class="badge rounded-pill text-bg-info" t-field="resume.status" />
+                            </t>
+                            <t t-if="resume.status == 'draft'">
+                                <span class="badge rounded-pill text-bg-info" t-field="resume.status" />
+                            </t>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- tree View -->
+		<record id="book_history_view_tree" model="ir.ui.view">
+			<field name="name">Book History</field>
+			<field name="model">booking.history</field>
+			<field name="arch" type="xml">
+				<tree >
+					<field name="name" />
+					<field name="booking_date" />
+					<field name="expiry_date" />
+					<field name="status" decoration-success="status == 'returned' or status == 'pending'" decoration-info="status == 'approved'" decoration-danger="status == 'draft'" widget="badge"/>
+					<field name="total_days" />
+					
+				</tree>
+			</field>
+		</record>
+		<!-- form View -->
+		<record id="booking_history_form" model="ir.ui.view">
+			<field name="name">book_history.form</field>
+			<field name="model">booking.history</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button string="Validate and Approve" name="validate_approve" type="object" class="oe_highlight" groups="wk_library_management.security_librarian_group" attrs="{'invisible':[('status','in',['approved','returned'])]}" />
+						<field name="status" widget="statusbar" statusbar_visible="draft,pending,approved,returned"/>
+					</header>
+					<sheet>
+						<div name="button_box" attrs="{'invisible':[('status','in',['draft','pending','returned'])]}" >
+							<button class="oe_stat_button mx-3 text-success" type="object" name="mark_as_returned" icon="fa-light fa-share">
+								Mark as returned	
+							</button>
+						</div>
+						<widget name="web_ribbon" title="Returned" attrs="{'invisible': [('status','in', ['draft','pending','approved'])]}"/>
+
+						<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1" />
+							</h1>
+                        </div>
+							<notebook>
+								<page name="booking_info" string="General Information">
+									<div class="d-flex justify-content-between">
+										<group>
+											<field name="booking_date" widget="date" />
+											<field name="expiry_date" widget="date" />
+											<field name="book_id" />
+										</group>
+										<group>
+											<field name="issued_by" />
+											<field name="received_by" />
+											<field name="assign_to" />	
+										</group>
+									</div>
+								</page>
+							</notebook>
+					</sheet>
+				</form>
+			</field>
+            </record>
+			<!-- Actions for view -->
+			<record id="book_history_action_id" model="ir.actions.act_window">
+				<field name="name">Book History</field>
+				<field name="res_model">booking.history</field>
+				<field name="view_id" ref="book_history_view_tree" />
+			</record>
+
+		<!-- Number Sequenceing -->
+			<record id="book_history_seq_order" model="ir.sequence">
+				<field name="name">Sequence Order</field>
+				<field name="code">booking.history</field>
+				<field name="number_next_actual">001</field>
+				<field name="prefix"></field>
+				<field name="padding">3</field>
+			</record>
+		
+		<!-- Server Actions -->
+	<record id="ir_action_server_deny_book_history" model="ir.actions.server">
+        <field name="name">Deny Histories</field>
+        <field name="model_id" ref="model_booking_history"/>
+        <field name="binding_model_id" ref="model_booking_history"/>
+        <field name="binding_view_types">list</field>
+		<field name="groups_id" eval="[(4,ref('security_librarian_group'))]"/>
+
+        <field name="state">code</field>
+        <field name="code">
+		if records:
+			records.deny_record()
+		</field>
+    </record>
+
+	<record id="ir_action_server_remainder_book" model="ir.actions.server">
+        <field name="name">Remainder Returning Book</field>
+        <field name="model_id" ref="model_booking_history"/>
+        <field name="binding_model_id" ref="model_booking_history"/>
+        <field name="binding_view_types">list</field>
+		<field name="groups_id" eval="[(4,ref('security_librarian_group'))]"/>
+        <field name="state">code</field>
+        <field name="code">
+		if records:
+			action = records.remainder_book()
+		</field>
+    </record>
+
+
+   <record id="ir_cron_scheduler_send_reminder" model="ir.cron">
+       <field name="name">Send Reminder</field>
+       <field name="model_id" ref="model_booking_history"/>
+       <field name="state">code</field>
+       <field name="code">model.action_reminder()</field>
+       <field name="user_id" ref="base.user_admin"/>
+       <field name="interval_number">1</field>
+       <field name="interval_type">days</field>
+       <field name="numbercall">-1</field>
+   </record>
+
+	</data>
+</odoo>

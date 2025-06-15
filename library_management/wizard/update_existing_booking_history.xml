@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="update_booking_history_wizard_form" model="ir.ui.view">
+            <field name="name">update.booking.history.wizard.form</field>
+            <field name="model">update.booking.history.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <h4>Select booking to update</h4>
+                    <field name="selection_booking_id"/>
+                    <group>
+                         <field name="booking_date"/>
+                        <field name="expiry_date" />
+
+                    </group>
+                    <footer>
+                        <button string="Update" name="update_change" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Discard" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="update_booking_history_wizard_action" model="ir.actions.act_window">
+            <field name="name">Update Wizard</field>
+            <field name="res_model">update.booking.history.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+
+</odoo>

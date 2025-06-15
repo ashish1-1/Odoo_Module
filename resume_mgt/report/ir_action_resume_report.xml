@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    	<!-- Report Action -->
+	<record id="action_report_resume_qweb_pdf" model="ir.actions.report">
+		<field name="name">Download Resume</field>
+		<field name="model">resume.application</field>
+		<field name="binding_model_id" ref="model_resume_application"/>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">wk_ashish_varshney_resume_mgt.report_template_employee_detail</field>
+		<field name="report_file">wk_ashish_varshney_resume_mgt.report_template_employee_detail</field>
+		<field name="binding_view_types">form</field>
+	</record>
+
+</odoo>

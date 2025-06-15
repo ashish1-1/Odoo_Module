@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="report_template_employee_detail">
+		<t t-call="web.basic_layout">
+			<t t-foreach="docs" t-as="resume">
+					<!-- <div class="page"> -->
+                    <div class="oe_structure"/>
+                        <div class="card-body">
+                            <h1><t t-esc="resume.name" /></h1>
+                            <h3>Software Developer</h3>
+                            <h5>Career Objective: <t t-esc="resume.introduction" /></h5>
+                            <div class="border" style="border: 5px solid blue !important;">
+                                <ul class="d-flex mt-2 " style="list-style-type: none">
+                                    <div class="col-4 d-flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone" viewBox="0 0 16 16">
+                                        <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+                                        <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                        </svg>
+                                    <li t-esc="resume.mobile" class="my-auto"></li>
+                                    </div>
+
+                                    <div class="col-4 d-flex">
+                                        
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at mx-1" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
+                                    <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+                                    </svg>
+                                    <li t-esc="resume.email" ></li>
+                                    </div>
+                                                                        
+                                    <div class="col-4">
+                                        <li>www.linkedin.com/in/id_name</li>
+                                    </div>
+                                    
+                                </ul>
+                            </div>
+
+                            <h5 class="my-3">Education Qualification :</h5>
+
+                            <ul class="mx-5">
+                                <t t-foreach="resume.education_background_ids" t-as="edu">
+                                    <li><t t-esc="edu.degree"/> from <t t-esc="edu.board"/>, <t t-esc="edu.school_college"/> with <t t-esc="edu.percentage_cgpa_val"/>% in year <t t-esc="edu.year"/></li>
+                                </t>
+                            </ul>
+
+                            <div class="row mx-1">
+                                <div class="col-4" style="background-color:#b3ebf5;">
+                                    <h5 class="my-3">Training </h5>
+                                        <t t-foreach="resume.experience_project_ids" t-as="o">
+                                            <t t-if="o.line_type_id.name == 'Experience' ">
+                                                <p><b>Organization :</b> <t t-esc="o.name" /></p>
+                                                <p><b>Duration : </b><t t-esc="o.duration" /></p>
+                                                <p><b>Technology Used : </b>Python Programming on odoo framework</p>
+                                                <p><b>Learning : </b><t t-esc="o.description" /></p>
+                                            </t>
+                                        </t>
+
+                                   <t t-set="count_tec" t-value="env['resume.skill'].search_count([('skill_type_id.name','=','Dev'),('resume_id','=',resume.id)])" />
+                                    <t t-if="count_tec > 0" >
+                                        <t t-set="dev" t-value="env['resume.skill'].search([('skill_type_id.name','=','Dev'),('resume_id','=',resume.id)])" />
+                                            <h5 class="mt-2">Technicals Skills</h5>
+                                            <t t-foreach="dev" t-as="var">
+                                                <ul>
+                                                    <li><t t-esc="var.name.name" /></li>
+                                                </ul>
+                                            </t>
+                                        
+                                    </t>
+                                     <t t-set="count_marketing" t-value="env['resume.skill'].search_count([('skill_type_id.name','=','Marketing'),('resume_id','=',resume.id)])" />
+                                    <t t-if="count_marketing > 0" >
+                                        <t t-set="mar" t-value="env['resume.skill'].search([('skill_type_id.name','=','Marketing'),('resume_id','=',resume.id)])" />
+                                            <h5 class="mt-2">Marketing Skills</h5>
+                                            <t t-foreach="mar" t-as="mar_var">
+                                                <ul>
+                                                    <li><t t-esc="mar_var.name.name" /></li>
+                                                </ul>
+                                            </t>
+
+                                    </t>
+                                    
+                                    <t t-set="count_Languages" t-value="env['resume.skill'].search_count([('skill_type_id.name','=','Languages'),('resume_id','=',resume.id)])" />
+                                    <t t-if="count_Languages > 0" >
+                                        <t t-set="langg" t-value="env['resume.skill'].search([('skill_type_id.name','=','Languages'),('resume_id','=',resume.id)])" />
+                                            <h5 class="mt-2">Languages Known</h5>
+                                            <t t-foreach="langg" t-as="lang_var">
+                                                <ul>
+                                                    <li><t t-esc="lang_var.name.name" /></li>
+                                                </ul>
+                                            </t>
+                                    </t>
+
+                                    <h5 class="mt-2">Hobbies</h5>
+                                    <ul>
+                                        <t t-foreach="resume.hobbies_ids" t-as="hobbie">
+                                            <li><t t-esc="hobbie.name" /></li>
+                                        </t>
+                                    </ul>
+
+                                    <h5 class="mt-2">Personal Details</h5>
+                                    <p><b>Date of Birth :</b> <t t-esc="resume.dob" /></p>
+                                    <p><b>Father's Name :</b> <t t-esc="resume.father_name" /></p>
+                                   
+                                </div>
+                                <div class="col-6 ms-3">
+                                     
+                                    <h5 class="my-3">Projects </h5>
+                                    <t t-set="count_pro" t-value="1" />
+                                        <t t-foreach="resume.experience_project_ids" t-as="o">
+                                            <t t-if="o.line_type_id.name == 'Projects' ">
+                                                <h5 class="my-3">Project Name <t t-esc="count_pro"/></h5>
+                                                <t t-set="count_pro" t-value="count_pro + 1" />
+                                                <ul>
+                                                    <li><t t-esc="o.name" /></li>
+                                                    <li><b>Technology used :</b><t t-esc="o.technology_used" /></li>
+                                                </ul>
+                                                
+                                            </t>
+                                        </t>
+
+
+                                    <h5 class="my-3">Certications</h5>
+                                     <t t-foreach="resume.certification_ids" t-as="o">
+                                            
+                                                <ul>
+                                                    <li><t t-esc="o.name" /></li>
+                                                </ul>
+                                         
+                                        </t>
+                                    
+                                    <h5 class="my-3">Achivements</h5>
+                                     <t t-foreach="resume.achivement_ids" t-as="o">
+                                            
+                                                <ul>
+                                                    <li><t t-esc="o.name" /></li>
+                                                </ul>
+                                         
+                                        </t>
+                                    
+                                </div>
+                            </div>
+                        </div>
+          
+                    <div class="oe_structure"/>
+				
+			</t>
+		</t>
+	</template>
+
+</odoo>
+

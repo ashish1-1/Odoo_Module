@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="resume_website_templates" name="resume_details">
+		<t t-call="website.layout">
+			<div class="oe_structure">
+                <div class="container">
+                    <div class="row g-4 my-3" id="add_resume">
+						<t t-foreach="records" t-as="o">
+							<div class="col-12 col-md-4 col-lg-3">
+								<a t-attf-href="/resume/#{o.id}" class="text-decoration-none">
+									<div class="d-flex justify-content-between mt-4">
+                                        <!-- card-1 -->
+                                        <div class="card" style="width: 22rem; height:30rem ">
+                                        <t t-if="o.image">
+                                             <img
+                                            class="card-img-top mx-auto mt-4 rounded-circle img-fluid w-75"
+                                            t-attf-src="data:image/*;base64,{{o.image}}"
+                                            alt="Card image cap"
+                                            />
+                                        </t>
+                                        <t t-else="">
+                                            <img
+                                            class="card-img-top mx-auto mt-4 rounded-circle img-fluid w-75"
+                                            src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
+                                            alt="Card image cap"
+                                            />
+                                        </t>
+                                           
+                                            <div class="card-body text-center">
+                                                <div class="">
+                                                    <h5 class="card-title"><t t-esc="o.name" /></h5>
+                                                    <p style="margin-top: -11px; margin-bottom: 2rem">
+                                                    Software Developer
+                                                    </p>
+                                                </div>
+                                                <p class="card-text" style="color: rgba(186, 186, 186, 255)">
+                                                    <t t-esc="o.introduction" />
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+								</a>
+							</div>
+						</t>
+					</div>
+                </div>
+            </div>
+		</t>
+	</template>
+
+    <template id="single_resume_template" name="resume_detail">
+		<t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Resume</t>
+        </t>
+			<div class="o_portal_wrap my-3">
+                <div class="container">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h1><t t-esc="resume.name" /></h1>
+                            <h3><t t-esc="resume.job_postion"/></h3>
+                            <h5>Career Objective: <t t-esc="resume.introduction" /></h5>
+                            <div class="border" style="border: 4px solid black !important;">
+                                <ul class="d-flex justify-content-between mt-2" style="list-style-type: none">
+                                    <div class="">
+                                        <li class="my-auto fa fa-mobile"><span t-esc="resume.mobile" class="p-1"></span></li>
+                                    </div>
+
+                                    <div class="">
+                                        <li class="my-auto fa fa-envelope"><span t-esc="resume.email" class="p-1 text-info"></span></li>
+
+                                    </div>
+                                                                        
+                                   <div class="">
+                                    <li class="my-auto fa fa-linkedin"><span t-esc="resume.linked_info" class="p-1 text-info"></span></li>
+                                   </div>
+                                    
+                                </ul>
+                            </div>
+
+                            <h5 t-if="resume.education_background_ids" class="my-3">Education Qualification :</h5>
+
+                            <ul class="mx-5">
+                                <t t-foreach="resume.education_background_ids" t-as="edu">
+                                    <li><t t-esc="edu.degree"/> from <t t-esc="edu.board"/>, <t t-esc="edu.school_college"/> with <t t-esc="edu.percentage_cgpa_val"/>% in year <t t-esc="edu.year"/></li>
+                                </t>
+                            </ul>
+
+                            <div class="row mx-1">
+                                <div class="col-md-4 bg-info">
+                                    
+                                    <t t-foreach="resume.experience_project_ids" t-as="o">
+                                        <t t-if="o.line_type_id.name != 'Projects' ">
+                                        <h5 class="mt-2"><t t-esc="o.line_type_id.name" /></h5>
+                                        <p><b>Organization :</b> <t t-esc="o.name" /><br/>
+                                        <b>Duration : </b><t t-esc="o.duration" /><br/>
+                                        <b>Technology Used : </b><t t-esc="o.technology_used" /><br/>
+                                            <b>Learning : </b><t t-esc="o.description" /></p>
+                                                <hr/>
+                                            </t>       
+                                    </t>
+
+                                    <!-- <t t-foreach="resume.skill_type_skill_ids.skill_type_id" t-as="skill_type">
+                                        <h5 class="mt-2"><t t-esc="skill_type.name"/></h5>
+                                        <t t-foreach="resume.skill_type_skill_ids" t-as="skill">
+                                            <t t-if="skill.skill_type_id.name == skill_type.name">  
+                                            <li><t t-esc="skill.skills_id.name"/></li>
+                                            </t>
+                                        </t>
+                                    </t> -->
+                                    <t t-foreach="skill_data" t-as="type">
+                                        <strong><t t-esc="type"/></strong>
+                                        <ul>
+                                            <li><t t-esc="skill_data.get(type)"/></li>
+                                        </ul>
+                                        
+                                    </t>
+
+                                  
+                                    <h5 t-if="resume.hobbies_ids" class="mt-2">Hobbies</h5>
+                                    <ul>
+                                        <t t-foreach="resume.hobbies_ids" t-as="hobbie">
+                                            <li><t t-esc="hobbie.name" /></li>
+                                        </t>
+                                    </ul>
+
+
+                                    <h5 class="mt-2">Personal Details</h5>
+                                    <p><b>Date of Birth :</b> <t t-esc="resume.dob" /></p>
+                                    <p><b>Father's Name :</b> <t t-esc="resume.father_name" /></p>
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                     
+                                    <h5 t-if="resume.experience_project_ids" class="my-3">Projects </h5>
+                                    <t t-set="count_pro" t-value="1" />
+                                        <t t-foreach="resume.experience_project_ids" t-as="o">
+                                            <t t-if="o.line_type_id.name == 'Projects' ">
+                                                <h4 class="my-3">Project Name <t t-esc="count_pro"/></h4>
+                                                <t t-set="count_pro" t-value="count_pro + 1" />
+                                                <ul>
+                                                    <li><t t-esc="o.name" /></li>
+                                                    <li><b>Technology used :</b><t t-esc="o.technology_used" /></li>
+                                                </ul>
+                                            </t>
+                                        </t>
+
+                                    <h5 t-if="resume.certification_ids" class="my-3">Certifications</h5>
+                                     <t t-foreach="resume.certification_ids" t-as="o">
+                                            
+                                                <ul>
+                                                    <li><t t-esc="o.name" /></li>
+                                                </ul>
+                                         
+                                        </t>
+                                    
+                                    <h5 t-if="resume.certification_ids" class="my-3">Achivements</h5>
+                                     <t t-foreach="resume.achivement_ids" t-as="o">
+                                            
+                                                <ul>
+                                                    <li><t t-esc="o.name" /></li>
+                                                </ul>
+                                         
+                                        </t>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</t>
+	</template>
+
+</odoo>
+
+
+

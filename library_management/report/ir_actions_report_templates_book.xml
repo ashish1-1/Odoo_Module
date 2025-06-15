@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="report_template_book_detail">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="doc">
+				<t t-call="web.external_layout">
+					<div class="page">
+		        <h2 t-field="doc.name"/>
+            <h4 t-field="doc.isbn"/>
+            <h4 t-field="doc.no_of_copies" />
+            <h4 t-field="doc.availability" />
+            <h4 t-field="doc.category_ids" />
+					</div>
+				</t>
+			</t>
+		</t>
+	</template>
+
+  <template id="report_template_booking_history">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="doc">
+        <t t-call="web.external_layout">
+          <div class="page">
+              <h2>
+                Booking No. :- <span t-field="doc.name" />
+              </h2> 
+              
+              <h3>
+                User Details
+              </h3>
+              <h4>
+                Name   - <span t-field="doc.assign_to" /><br/>
+                 Email  - <span t-field="doc.assign_to.email" />
+              </h4>
+          
+              <h3>
+                Books Details
+              </h3>
+              <h4>
+                Book Name - <span t-field="doc.book_id.name" /><br/>
+                Isbn No. - <span t-field="doc.book_id.isbn" />
+              </h4>
+                
+              <h3>
+                Booking Duration
+              </h3>
+              <h4>
+                Booking Date - <span t-field="doc.booking_date" /><br/>
+                Booking Till - <span t-field="doc.expiry_date" /><br/>
+                Status - <span t-field="doc.status" />
+              </h4>
+          </div>
+        </t>
+      </t>
+    </t>
+  </template>
+
+  <template id="report_template_respartner_history">
+		<t t-call="web.html_container">
+			<t t-foreach="docs.history_ids" t-as="doc">
+				<t t-call="web.external_layout">
+					<div class="page">
+              <h2>
+                Booking No. :- <span t-field="doc.name" />
+              </h2>
+
+              <h2>
+                Book Name :- <span t-field="doc.book_id" />
+              </h2>
+              <h3>
+                Booking Duration
+              </h3>
+              <h4>
+                Booking Date - <span t-field="doc.booking_date" /><br/>
+                Booking Till - <span t-field="doc.expiry_date" /><br/>
+                Status - <span t-field="doc.status" />
+              </h4>
+
+              <h2>
+                Assign To :- <span t-field="doc.assign_to" />
+              </h2>
+					</div>
+				</t>
+			</t>
+		</t>
+	</template>
+
+  
+</odoo>

@@ -1,0 +1,17 @@
+#book_name{
+    color: brown;
+}
+
+.img-size{
+    height: 40vh;
+    width: 17vw;
+}
+
+.in{
+    display: inline;
+}
+
+.img-custom{
+    width: 15vw;
+    height: 40vh;
+}

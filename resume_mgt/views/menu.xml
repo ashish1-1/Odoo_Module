@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="root_menu"
+        name="Resume Management"
+        sequence="-100"/>
+
+        <menuitem
+            id="resume_application_menu"
+            name="Employee Details"
+            action="wk_ashish_varshney_resume_mgt.resume_application_action"
+            parent="root_menu"
+            sequence="0"/>
+
+        <menuitem
+            id="education_background_menu"
+            name="Education Background"
+            action="education_background_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+        
+        <menuitem
+            id="skills_menu"
+            name="Skills"
+            action="skills_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+        
+        <menuitem
+            id="experience_projects_menu"
+            name="Experience Projects"
+            action="experience_projects_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+
+        <menuitem
+            id="hobbies_menu"
+            name="Hobbies"
+            action="hobbies_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+
+        <menuitem
+            id="certification_menu"
+            name="Certification"
+            action="certification_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+        
+        <menuitem
+            id="achivement_menu"
+            name="Achivement"
+            action="achivement_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+
+        <menuitem
+            id="custom_skill_menu"
+            name="Custom Skill"
+            action="custom_skill_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+
+        <menuitem
+            id="custom_skill_type_menu"
+            name="Custom Skill Type"
+            action="custom_skill_type_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+
+        <menuitem
+            id="custom_skills_menu"
+            name="Custom Skills"
+            action="custom_skills_action"
+            groups="wk_ashish_varshney_resume_mgt.security_manager_group"
+            parent="root_menu"
+            sequence="1"/>
+
+</odoo>

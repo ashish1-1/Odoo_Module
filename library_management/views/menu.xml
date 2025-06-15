@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+ <menuitem id="menu_books_detail" name="Odoo Library Mangement System"/>
+ <!-- Main Menu items-->
+ <menuitem id="menu_books_details_reports" name="Books" parent="menu_books_detail" action="wk_library_management.book_action_id" sequence="0"/>
+ <menuitem id="menu_books_category_report" name="Books Category" parent="menu_books_detail" action="wk_library_management.book_category_action_id" sequence="1"/>
+ <menuitem id="menu_books_history_report" name="Books History" parent="menu_books_detail" action="wk_library_management.book_history_action_id" sequence="2"/>
+</odoo>

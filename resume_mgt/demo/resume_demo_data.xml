@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="hobbies_1" model="hobbie.hobbies">
+        <field name="name">Reading Books</field>
+    </record>
+
+    <record id="edu_1" model="education.background">
+        <field name="board">CBSE</field>
+        <field name="school_college">Saraswati Vidya Mandir Sr. Sec. School</field>
+        <field name="year">2016</field>
+        <field name="max_marks">500</field>
+        <field name="marks_obtained">358</field>
+        <field name="degree">10th</field>
+    </record>
+
+    <record id="edu_2" model="education.background">
+        <field name="board">CBSE</field>
+        <field name="school_college">Saraswati Vidya Mandir Sr. Sec. School</field>
+        <field name="year">2018</field>
+        <field name="max_marks">500</field>
+        <field name="marks_obtained">358</field>
+        <field name="degree">12th</field>
+    </record>
+
+    <record id="certi_1" model="certification.certifications">
+        <field name="name">Python in data structure(Udemy)</field>
+    </record>
+
+    <record id="achive_1" model="achivement.achivements">
+        <field name="name">4 start on LeetCode</field>
+    </record>
+
+    <record id="resume_test_1" model="resume.application">
+        <field name="name">Demo User</field>
+        <field name="responsible_id" ref="base.partner_demo"/>
+        <field name="mobile">7417646585</field>
+        <field name="status">approved</field>
+        <field name="street">Laxmi nagar colony</field>
+        <field name="zip">200150</field>
+        <field name="city">Ghaziabad</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_up"/>
+        <field name="dob" eval="datetime(1998,11,6).strftime('%Y-%m-%dT%H:%M:%S')"/>
+        <field name="email">demo1@gmail.com</field>
+        <field name="introduction">This is the carrer objective for resume</field>
+        <field name="father_name">R.K. Maurya</field>
+       <field name="linked_info">demo/linkedin.com</field>
+       <field name="job_postion">demo job postions</field>
+        <field name="education_background_ids" eval="[(6, 0, [ref('edu_1'), ref('edu_2')])]"/>
+        <field name="certification_ids" eval="[(6, 0, [ref('certi_1')])]"/>
+        <field name="achivement_ids" eval="[(6, 0, [ref('achive_1')])]"/>
+        <field name="hobbies_ids" eval="[(6, 0, [ref('hobbies_1')])]"/>
+        <!-- <field name="country_id" ref="base.in"/> -->
+    </record>
+
+    <record id="skill_1" model="resume.skill">
+        <field name="name" ref="hr_skills.hr_skill_python"/>
+        <field name="skill_type_id" ref="hr_skills.hr_skill_type_dev"/>
+        <field name="skill_level_id" ref="hr_skills.hr_skill_level_intermediate"/>
+        <field name="resume_id" ref="resume_test_1"/>
+    </record>
+
+    <record id="experience_1" model="experience.project">
+        <field name="name">Demo Company</field>
+        <field name="line_type_id" ref="hr_skills.resume_type_experience"/>
+        <field name="job_position">Software Developer</field>
+        <field name="date_start" eval="datetime(1998,11,6).strftime('%Y-%m-%dT%H:%M:%S')"/>
+        <field name="description">This is demo description</field>
+        <field name="technology_used">Python With Django</field>
+        <field name="resume_id" ref="resume_test_1"/>
+    </record>
+
+    <record id="resume_type_project" model="hr.resume.line.type">
+        <field name="name">Projects</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record id="porject_1" model="experience.project">
+        <field name="name">Demo Project</field>
+        <field name="line_type_id" ref="resume_type_project"/>
+        <field name="job_position">Software Developer</field>
+        <field name="date_start" eval="datetime(1998,11,6).strftime('%Y-%m-%dT%H:%M:%S')"/>
+        <field name="description">This is demo description</field>
+        <field name="technology_used">Python With Django</field>
+        <field name="no_of_people_involved">2</field>
+        <field name="resume_id" ref="resume_test_1"/>
+    </record>
+
+
+
+</odoo>

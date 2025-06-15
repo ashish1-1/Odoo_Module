@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="book_website_templates" name="Book Details">
+		<t t-call="website.layout">
+			<div class="oe_structure">
+				<!-- Add to book Button -->
+				<!-- Button trigger modal -->
+				<div class="container my-3 text-end" groups="wk_library_management.security_admin_group">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalHttp">
+						ADD BOOK(http)
+					</button>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalJson">
+						ADD BOOK(json)
+					</button>
+				</div>
+				<!-- Modals of HTTP Button -->
+				<div class="modal fade" id="exampleModalHttp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">
+									ADD BOOK BY HTTP
+								</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="/book/add-book" method="post" id="httpForm" enctype="multipart/form-data">
+									<div class="row mb-3">
+										<label for="" class="col-sm-2 col-form-label">
+											Book Name
+										</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="name" required=""/>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="" class="col-sm-2 col-form-label" >
+											ISBN
+										</label>
+										<div class="col-sm-10">
+											<input type="number" class="form-control" name="isbn" required=""/>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="inputPassword3" class="col-sm-2 col-form-label">
+											Copies
+										</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="no_of_copies"/>
+										</div>
+									</div>
+									<!-- Image Upload -->
+									<div class="row mb-3">
+										<input class="form-control" type="file" name="image" multiple="true"  data-show-upload="true" data-show-caption="true" data-show-preview="true" accept="image/*"/>
+									</div>
+									<div class="row mb-3">
+										<label for="" class="col-sm-2 col-form-label">
+												Category :
+										</label>
+										<!-- Multi value select fromc category -->
+										<div class="col-sm-10">
+											<t t-set="category_ids" t-value="env['book.category'].sudo().search([])"/>
+											<select multiple="multiple" name="category_ids" class="form-control select2">
+												<t t-foreach="category_ids" t-as="cat_id">
+													<option t-att-value="cat_id.id">
+														<t t-esc="cat_id.name"/>
+													</option>
+												</t>
+											</select>
+										</div>
+									</div>
+
+
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="gridCheck1" name="availability" />
+										<label class="form-check-label" for="gridCheck1">
+											Availability
+										</label>
+									</div>
+									<button type="submit" id="submit" class="btn btn-primary mt-2">
+										Submit
+									</button>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+									Close
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Modal for JSON -->
+				<div class="modal fade" id="exampleModalJson" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">
+									ADD BOOK BY JSON
+								</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="/book/add-book-Json" method="post" id="jsonForm" enctype="multipart/form-data">
+									<div class="row mb-3">
+										<label for="" class="col-sm-2 col-form-label">
+											Book Name
+										</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="name" id="book" required=""/>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="" class="col-sm-2 col-form-label">
+											ISBN
+										</label>
+										<div class="col-sm-10">
+											<input type="number" class="form-control" name="isbn" id="isbn" required="" />
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="inputPassword3" class="col-sm-2 col-form-label">
+											Copies
+										</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="no_of_copies" id="copies" required=""/>
+										</div>
+									</div>
+
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="check" name="availability" />
+										<label class="form-check-label" for="gridCheck1">
+											Availability
+										</label>
+									</div>
+									<button type="submit" id="submit" class="btn btn-primary mt-2">
+										Submit
+									</button>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+									Close
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row g-4 my-3" id="addBook">
+						<t t-foreach="records" t-as="book">
+							<div class="col-12 col-md-4 col-lg-3">
+								<a t-attf-href="/book/#{book.id}" class="text-decoration-none">
+									<div class="card border-0 rounded-0 shadow-lg">
+										<div class="text-center mt-4">
+											<img class="card-img img-custom " t-attf-src="data:image/*;base64,{{book.image}}"  />
+										</div>
+										<div class="card-body px-5">
+											<h6 class="card-title text-muted text-truncate">
+												<span class="bg-success p-2 rounded-circle text-white" t-esc="book.name" />
+											</h6>
+											<p class="card-text small">
+												<span t-esc="book.isbn" />
+											</p>
+											
+										</div>
+									</div>
+								</a>
+							</div>
+						</t>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+
+	<template id="book_details" name="Book Detail">
+		<t t-call="website.layout">
+			<div class="container">
+				<div class="oe_structure" />
+				<div class="row my-3">
+					<div class="col-12">
+						<div class="row">
+							<div class="col-6">
+								<h2 id="book_name">
+									Book Name :
+									<t t-esc="book.name" />
+									<h3>
+										ISBN No. :
+										<t t-esc="book.isbn" />
+									</h3>
+									<h3>
+										Copies :
+										<t t-out="book.no_of_copies" />
+									</h3>
+									<h3>
+										Description :
+										<t t-out="book.description" />
+									</h3>
+									<h3 class="in">
+										Category :
+									</h3>
+									<t t-foreach="book.category_ids" t-as="boo">
+										<t t-out="boo.name" />
+										<span>
+											,
+										</span>
+									</t>
+								</h2>
+								</div>
+								<div class="col-6">
+									<img class="card-img img-size" t-attf-src="data:image/*;base64,{{book.image}}" />
+								</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+
+	<template id="add_book_template" name="Add_book">
+			<div class="col-12 col-md-4 col-lg-3" id="appendData">
+				<a t-attf-href="/book/#{book.id}" class="text-decoration-none">
+					<div class="card border-0 rounded-0 shadow-lg">
+						<div class="text-center mt-5">
+							<img class="card-img img-custom " t-attf-src="data:image/*;base64,{{book.image}}"  />
+						</div>
+						<div class="card-body px-4">
+							<h4 class="card-title text-muted">
+								<span class="bg-success p-2 rounded-pill text-white"  t-esc="book.name" />
+							</h4>
+							<p class="card-text small">
+								<span t-esc="book.isbn" />
+							</p>
+							
+						</div>
+					</div>
+				</a>
+			</div>
+		</template>
+</odoo>

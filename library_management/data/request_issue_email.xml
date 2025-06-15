@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="mail_template_request_issue" model="mail.template">
+        <field name="name">Request has been generated</field>
+        <field name="model_id" ref="wk_library_management.model_booking_history"/>
+        <field name="subject">Booking Request of {{object.book_id.name}}</field>
+        <field name="email_to">{{ object.assign_to.email }}</field>
+        <field name="description">You create a request for book</field>
+        <field name="report_template" ref="wk_library_management.action_report_book_history_qweb_pdf" />
+        <field name="report_name">Issued_book_{{object.book_id.name}}_{{object.book_id.isbn}}</field>
+        <field name="body_html" type="html">
+            <div>
+               <p>Hi <span><t t-out="object.assign_to.name"/>,</span></p>
+               <p>Your request has been submitted successfully on <span><t t-out="object.booking_date.strftime('%A')"/>, <t t-out="object.booking_date.strftime('%B')"/> <t t-out="object.booking_date.day"/>,<t t-out="object.booking_date.year"/> at <t t-out="object.booking_date.hour"/>:<t t-out="object.booking_date.minute"/> Please find the details below</span></p>
+            </div>
+
+            <div class="" style="max-width: 40rem; margin-left:20rem; border: 2px solid black; margin-top:2rem">
+                <div class="" style=" background-color: #008B8B; text-align: center; color:white; font-size: 20px; border-bottom: 2px solid black; max-height: 7rem;">Confirmed Time: <t t-out="object.booking_date.strftime('%A')"/>, <t t-out="object.booking_date.strftime('%B')"/> <t t-out="object.booking_date.day"/>,<t t-out="object.booking_date.year"/> at <t t-out="object.booking_date.hour"/>:<t t-out="object.booking_date.minute"/></div>
+                    <div class="card-body" style="margin-left:2rem">
+                        <h4 class="card-title">Booking No. : <t t-out="object.name"/></h4>
+                        <h5 class="card-title">Book Name : <t t-out="object.book_id.name"/></h5>
+                        <p class="card-text">ISBN No. : <t t-out="object.book_id.isbn"/></p>
+                        <hr></hr>
+                        <h5 class="card-title">Booking Duration And Status</h5>
+                        <p class="card-text">Booking Date : <t t-out="object.booking_date"/></p>
+                        <p class="card-text">Booking Till : <t t-out="object.expiry_date"/></p>
+                        <p class="card-text">status : <t t-out="object.status"/></p>
+                        
+
+                    </div>
+            </div>
+        </field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <record id="mail_template_status_approved" model="mail.template">
+        <field name="name">Request has Approved</field>
+        <field name="model_id" ref="wk_library_management.model_booking_history"/>
+        <field name="subject">Booking Request of {{object.book_id.name}}</field>
+        <field name="email_to">{{ object.assign_to.email }}</field>
+        <field name="description">Your request has approved</field>
+        <field name="body_html" type="html">
+            <div>
+               <p>Hi <span><t t-out="object.assign_to.name"/>,</span></p>
+               <p>Your request has been changed to Approve on <span><t t-out="object.booking_date.strftime('%A')"/>, <t t-out="object.booking_date.strftime('%B')"/> <t t-out="object.booking_date.day"/>,<t t-out="object.booking_date.year"/></span></p>
+            </div>
+        </field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <record id="mail_template_remainder_book" model="mail.template">
+        <field name="name">Remainder for books</field>
+        <field name="model_id" ref="wk_library_management.model_booking_history"/>
+        <field name="subject">Remainder for returning book of {{object.book_id.name}}</field>
+        <field name="email_to">{{ object.assign_to.email }}</field>
+        <field name="description">Remainder for returning book</field>
+        <field name="body_html" type="html">
+            <div>
+               <p>Hi <span><t t-out="object.assign_to.name"/>,</span></p>
+               <p>The reminder for returning books. </p>
+            </div>
+        </field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <record id="mail_template_notify_user" model="mail.template">
+        <field name="name">Notify User</field>
+        <field name="model_id" ref="wk_library_management.model_booking_history"/>
+        <field name="subject">Sorry we are unable to process the booking request of {{object.book_id.name}}</field>
+        <field name="email_to">{{ object.assign_to.email }}</field>
+        <field name="description">Notify User for unable to process the booking request</field>
+        <field name="body_html" type="html">
+            <div>
+               <p>Hi <span><t t-out="object.assign_to.name"/>,</span></p>
+               <p>Sorry we are unable to process the booking request between the duration you have mentioned inside the booking. But the good news is there are few slots available between this duration. You can choose one of the slots between this period.</p>
+               <ul style="color:red;">
+                <li><t t-out="object.available_booking_date" /> between <t t-out="object.available_expiry_date" /></li>
+               </ul>
+               <p>Else you can choose the date after the mentioned dates.</p>
+            </div>
+        </field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    </data>
+</odoo>

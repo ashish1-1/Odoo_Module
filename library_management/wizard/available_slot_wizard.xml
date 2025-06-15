@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="available_slot_wizard_form" model="ir.ui.view">
+            <field name="name">available.slot.wizard.form</field>
+            <field name="model">available.slot.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                <field name="slots_ids">
+                <tree>
+                    <field name="available_booking_date" />
+                    <field name="available_expiry_date" />
+
+                </tree>
+                </field>
+                    <footer>
+                        <button string="Notify User" name="notify_user" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Discard" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="available_slot_wizard_action" model="ir.actions.act_window">
+            <field name="name">Available Slots</field>
+            <field name="res_model">available.slot.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+
+</odoo>

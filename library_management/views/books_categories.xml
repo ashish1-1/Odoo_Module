@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	<!-- tree/list for books category model file -->
+	<record id="book_category_view_tree" model="ir.ui.view">
+		<field name="name">Book Category</field>
+		<field name="model">book.category</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="description"/>
+			</tree>
+		</field>
+	</record>
+<!-- forms -->
+	<record id="book_category_form" model="ir.ui.view">
+		<field name="name">book_category.form</field>
+		<field name="model">book.category</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+
+				<div name="button_box">
+                    <button class="oe_stat_button" type="object" name="get_books"
+                        icon="fa-book">
+                        <field string="Units" name="book_count" widget="statinfo"/>
+                    </button>
+                </div>
+
+					<div class="d-flex justify-content-between">
+					<h1><field name="name"/></h1>
+					<field name="image" widget="image" class="oe_avatar"/>
+					</div>
+					<notebook>
+						<page name="book_category_note" string="Notes">
+							<group>
+								<field name="description"/>
+								<field name="parent_id"/>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- Action for books category Model -->
+	<record id="book_category_action_id" model="ir.actions.act_window">
+      <field name="name">Book Category</field>
+      <field name="res_model">book.category</field>
+      <field name="view_id" ref="book_category_view_tree"/>
+ 	</record>
+
+
+	<!-- Server Action -->
+	<record id="ir_action_server_add_book" model="ir.actions.server">
+        <field name="name">Add book</field>
+        <field name="model_id" ref="model_book_category"/>
+        <field name="binding_model_id" ref="model_book_category"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+		if records:
+			action = records.adding_book()
+		</field>
+    </record>
+
+	</data>
+</odoo>
+
+

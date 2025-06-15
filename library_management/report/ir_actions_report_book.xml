@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    	<!-- Report Action -->
+	<record id="action_report_books_qweb_pdf" model="ir.actions.report">
+		<field name="name">Download Book Details</field>
+		<field name="model">book.books</field>
+		<field name="binding_model_id" ref="model_book_books"/>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">wk_library_management.report_template_book_detail</field>
+		<field name="report_file">wk_library_management.report_template_book_detail</field>
+		<field name="binding_view_types">form</field>
+	</record>
+
+	<record id="action_report_book_history_qweb_pdf" model="ir.actions.report">
+		<field name="name">Booking Histories</field>
+		<field name="model">booking.history</field>
+		<field name="binding_model_id" ref="model_booking_history"/>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">wk_library_management.report_template_booking_history</field>
+		<field name="report_file">wk_library_management.report_template_booking_history</field>
+		<field name="binding_view_types">form</field>
+	</record>
+
+	<record id="action_report_respartner_book_history_qweb_pdf" model="ir.actions.report">
+		<field name="name">Res partner History</field>
+		<field name="model">res.partner</field>
+		<field name="binding_model_id" ref="model_res_partner"/>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">wk_library_management.report_template_respartner_history</field>
+		<field name="report_file">wk_library_management.report_template_respartner_history</field>
+		<field name="binding_view_types">list</field>
+	</record>
+
+	
+
+
+
+</odoo>
