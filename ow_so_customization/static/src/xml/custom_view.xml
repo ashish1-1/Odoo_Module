@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="web.CustomAction">
+        <DropdownItem class="'o_custom_action_menu'" onSelected.bind="onClick">
+            <i class="fa fa-fw fa-file-pdf-o me-1"/>Report
+        </DropdownItem>
+    </t>
+
+</templates>

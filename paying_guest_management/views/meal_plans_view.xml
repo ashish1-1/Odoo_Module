@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="meal_plans_view_tree" model="ir.ui.view">
+            <field name="name">meal_plans.view.tree</field>
+            <field name="model">meal.plans</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="price" />
+                    <field name="active" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="meal_plans_action">
+            <field name="name">Meal Plans</field>
+            <field name="res_model">meal.plans</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" ref="meal_plans_view_tree"/>
+        </record>
+
+    </data>
+</odoo>

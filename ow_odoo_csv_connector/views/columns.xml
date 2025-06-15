@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="column_view_search" model="ir.ui.view">
+            <field name="name">column.view.search</field>
+            <field name="model">column.column</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <field name="name" />
+                    <field name="instance_id" />
+                    <group expand="1" string="Group By">
+                        <filter string="Instance" name="instance_id" context="{'group_by': 'instance_id'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="instance_id" string="Instances" enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="column_mapping_view_tree" model="ir.ui.view">
+            <field name="name">column.column.view.tree</field>
+            <field name="model">column.column</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="instance_id" />
+                </tree>
+            </field>
+        </record>
+    
+        <record id="column_mapping_view_form" model="ir.ui.view">
+            <field name="name">column.column.view.form</field>
+            <field name="model">column.column</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="instance_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="column_mapping_action">
+            <field name="name">Column Mapping</field>
+            <field name="res_model">column.column</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" ref="column_mapping_view_tree"/>
+        </record>
+    </data>
+    
+</odoo>

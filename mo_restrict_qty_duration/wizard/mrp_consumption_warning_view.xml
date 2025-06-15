@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="view_mrp_consumption_warning_form_inherit" model="ir.ui.view">
+            <field name="name">Consumption Warning Override</field>
+            <field name="model">mrp.consumption.warning</field>
+            <field name="inherit_id" ref="mrp.view_mrp_consumption_warning_form"/> <!-- Replace 'your_module_name' with the actual module name -->
+            <field name="arch" type="xml">
+        
+                <!-- Remove the 'Confirm' button -->
+                <xpath expr="//button[@name='action_confirm'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+        
+                <!-- Rename 'Set Quantities & Validate' button -->
+                <xpath expr="//button[@name='action_set_qty']" position="attributes">
+                    <attribute name="string">Confirm</attribute>
+                </xpath>
+        
+            </field>
+        </record>
+
+    </data>
+</odoo>

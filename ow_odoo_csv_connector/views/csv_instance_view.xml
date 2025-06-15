@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="instance_view_tree" model="ir.ui.view">
+            <field name="name">csv.connector.view.tree</field>
+            <field name="model">csv.instance</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+    
+        <record id="instance_view_form" model="ir.ui.view">
+            <field name="name">csv.connector.view.form</field>
+            <field name="model">csv.instance</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button
+                                help      ="Open wizard to import record."
+                                type      ="object"
+                                name      ="import_operation"
+                                class     ="oe_highlight btn btn-primary box"
+                            >   <i class="fa fa-cloud-download me-1" aria-hidden="true"></i>
+                                <span>Import</span>
+								</button>
+                        <button name="import_columns" type="object" string="" class="btn btn-secondary">
+                                <i class="fa fa-table me-1" aria-hidden="true"></i>
+                                <span>Import Excel Columns</span>
+                        </button>
+                    </header>
+                    <sheet>
+                    <field name="image" class="oe_avatar"  style="margin-right:5%;margin-top:20px" widget="image"/>
+					<div class="oe_title">
+						<!-- <b><label for="name"/></b> -->
+						<h1>
+							<field
+								name       ="name"
+								placeholder="Instance Name"
+							/>
+						</h1>
+						<!-- <div name="channels">
+							<div>
+								<label for="channel" string="Channel Type:"/>
+								<field
+									name ="channel"
+									class="oe_inline"
+								/>
+							</div>
+						</div> -->
+					</div>
+                    <group>
+                        <group>
+                            <field name="model_id" />
+                        </group>  
+                        <group>
+                            <field name="file" />
+                        </group>                       
+                    </group>
+                    <notebook>
+                        <page name="fields_column_mapping" string="Fields Column Mapping">
+                            <field name="field_column_mapping_ids" widget="section_and_note_one2many"  mode="tree">
+
+                                <tree editable="bottom">
+                                    <field name="instance_id" optional="hide"/>
+                                    <control>
+                                        <create name="add_line_control" string="Add a line"/>
+                                    </control>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="field_id"/>
+                                    <field name="excel_column_id"/>
+                                    <field name="model_id" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="sale_settings" string="Sale Setting">
+                            
+                        </page>
+                        <page name="product_settings" string="Product Setting">
+                            
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="instance_action">
+            <field name="name">CSV Connector</field>
+            <field name="res_model">csv.instance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="instance_view_tree"/>
+        </record>
+    </data>
+    
+</odoo>

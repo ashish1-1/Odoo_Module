@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+<menuitem
+        id="root_menu"
+        name="CSV Connector"
+        sequence="10"/>
+    <menuitem
+        id="instance_menu"
+        name="Instance"
+        parent="root_menu"
+        action="instance_action"
+        sequence="10" />
+
+    <menuitem
+        id="mapping"
+        name="Mappings"
+        parent="root_menu"
+        sequence="20"/>
+        <menuitem
+        id="column_mapping"
+        name="Columns"
+        parent="mapping"
+        action="column_mapping_action"
+        sequence="10"/>
+</odoo>

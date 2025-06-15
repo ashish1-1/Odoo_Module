@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="report_sales">
+       <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row mb-4">
+                            <t t-if="docs.partner_id">
+                                <div class="offset-col-6 col-6" name="no_shipping">
+                                    <t t-set="address">
+                                        <strong>Klient:</strong>
+                                        <span t-field="docs.partner_id.name"/> 
+                                        <span t-field=" docs.partner_id.country_id.name"/>
+                                        <!-- <address class="mb-0" t-field="docs.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/> -->
+                                        <div t-if="docs.partner_id.vat" id="partner_vat_no_shipping">
+                                            <t t-if="docs.company_id.account_fiscal_country_id.vat_label" t-out="docs.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
+                                            <t t-else="">Tax ID</t>: <span t-field="docs.partner_id.vat"/>
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                            <table class="table table-sm o_main_table mt-5">
+                                <thead>
+                                    <tr>
+                                        <th name="th_number" class="text-start"><span>Numri</span></th>
+                                        <th name="th_order_date" class="text-start"><span>Data e Porosise</span></th>
+                                        <!-- <th name="th_customer" t-attf-class="text-start"><span>Customer</span></th> -->
+                                        <th name="th_doctor" t-attf-class="text-start"><span>Doktori</span></th>
+                                        <th name="th_patient" t-attf-class="text-start"><span>Pacienti</span></th>
+                                        <th name="th_dx_left_up" class="text-start"><span>Majtas Lart</span></th>
+                                        <th name="th_dx_left_down" class="text-start"><span>Djathtas Lart</span></th>
+                                        <th name="th_dx_right_up" class="text-start"><span>Majtas Poshte</span></th>
+                                        <th name="th_dx_right_down" class="text-start"><span>Djathtas Poshte</span></th>
+                                        <th name="th_product" class="text-start" style="width: 20%"><span>Produkti</span></th>
+                                        <th name="th_quantity" class="text-start"><span>Sasi</span></th>
+                                        <th name="th_price" class="text-start"><span>Cmimi</span></th>
+                                        <th name="th_total" class="text-start"><span>Totali</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="">
+                                    <t t-foreach="docs" t-as="o">
+                                        <tr class="">
+                                                <td name="td_number"><span t-field="o.name" t-options="{'widget': 'text'}"></span></td>
+                                                
+                                                <td name="td_order_date">
+                                                    <span class="text-nowrap" t-esc="o.date_order.strftime('%d/%m/%Y')"></span>
+                                                </td>
+                                                <!-- <td name="td_customer">
+                                                    <span class="text-nowrap" t-field="o.partner_id"></span>
+                                                </td> -->
+                                                <td name="td_doctor">
+                                                    <span class="text-nowrap" t-field="o.doctor"></span>
+                                                </td>
+                                                <td name="td_patient">
+                                                    <span class="text-nowrap" t-field="o.patient"></span>
+                                                </td>
+                                                <td name="td_dx_left_up" t-attf-class="text-end">
+                                                    <span class="text-nowrap" t-field="o.dx_left_up"/>
+                                                </td>
+                                                <td name="td_dx_left_down" t-attf-class="text-end">
+                                                    <span class="text-nowrap" t-field="o.dx_left_down"/>
+                                                </td>
+                                                <td name="td_dx_right_up" t-attf-class="text-end">
+                                                    <span class="text-nowrap" t-field="o.dx_right_up"/>
+                                                </td>
+                                                <td name="td_dx_right_down" t-attf-class="text-end">
+                                                    <span class="text-nowrap" t-field="o.dx_right_down"/>
+                                                </td>
+                                                <td name="td_product" class="text-start" style="width: 20%">
+                                                    <span class="text-nowrap" t-field="o.ow_product_id"></span>
+                                                </td>
+                                                <td name="td_quantity" class="text-start">
+                                                    <span class="text-nowrap" t-esc="o.ow_product_uom_qty"></span>
+                                                </td>
+                                                <td name="td_price" class="text-start">
+                                                    <span class="text-nowrap" t-field="o.ow_price_unit"></span>
+                                                </td>
+                                                <td name="td_total" class="text-start">
+                                                    <span class="text-nowrap" t-field="o.amount_total"></span>
+                                                </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        <div id="right-elements" t-attf-class="col-3 col-md-5 d-inline-block float-end">
+                            <div id="total" class="row">
+                                <table class="table table-sm table-borderless">
+                                    <tr class="border-black o_total">
+                                        <td><strong>Total</strong></td>
+                                        <td class="text-end">
+                                            <span
+                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                t-out="docs.env.context.get('total_amount')"
+                                            ></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+            </t>
+        </t>
+   </template>
+</odoo>

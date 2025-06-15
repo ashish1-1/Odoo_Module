@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="pg_mgmt_view_tree" model="ir.ui.view">
+            <field name="name">pg_mgmt.view.tree</field>
+            <field name="model">pg.mgmt</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="customer_id" />
+                    <field name="email" />
+                    <field name="phone" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="pg_mgmt_view_form" model="ir.ui.view">
+            <field name="name">pg_mgmt.view.form</field>
+            <field name="model">pg.mgmt</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+					<field name="image" class="oe_avatar" widget="image"/>
+                    <div class="oe_title" style="margin-left: -4px;">
+                        <h1>
+                            <field id="customer" options="{'line_breaks': False}" class="text-break" name="customer_id" default_focus="1" placeholder="e.g. Customer"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="email" />
+                            <field name="aadhar_number" />
+                        </group>
+                        <group>
+                            <field name="phone" />
+                            <field name="payment_term_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="meal_details" string="Meal Details">
+                            <group>
+                                <group>
+                                    <field name="meal_plans_id" />
+                                    <field name="duration" />
+                                </group>
+                                <group>
+                                    <field name="meal_times" />
+                                    <field name="meal_type" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="aadhar_upload" string="Aadhar Upload">
+                            <field name="upload_file" widget="pdf_viewer"/>
+                        </page>
+
+                        <page name="payment_info" string="Payment Information">
+                            <group>
+                                <group>
+                                    <field name="payment_method" />
+                                </group>
+                                <group>
+                                    <field name="discount" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="pg_mgmt_action">
+            <field name="name">Paying Guest Management</field>
+            <field name="res_model">pg.mgmt</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" ref="pg_mgmt_view_tree"/>
+        </record>
+
+    </data>
+</odoo>

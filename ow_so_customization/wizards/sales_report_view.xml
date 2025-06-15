@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="sales_report_form" model="ir.ui.view">
+			<field name="name">sales.report.form</field>
+			<field name="model">sales.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+						<group>
+							<group>
+								<field name="client" 
+								 required="True"/>
+							</group>
+						</group>
+						<group>
+							<group>
+								<field name="from_date" required="True"/>
+							</group>
+							<group>
+								<field name="to_date" required="True"/>
+							</group>
+
+						</group>
+					</sheet>
+					<separator colspan="6"/>
+					<footer>
+						<button name="get_sales_report" string="Download" type="object" class="btn-primary"/>
+						<button special="cancel" name="cancel" string="Cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>

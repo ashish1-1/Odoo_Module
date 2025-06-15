@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_csv_instance,access_csv_instance,model_csv_instance,base.group_user,1,1,1,1
+access_mapping_column_column,access_mapping_column_column,model_column_column,base.group_user,1,1,1,1
+ow_odoo_csv_connector.access_field_column_mapping,access_field_column_mapping,ow_odoo_csv_connector.model_field_column_mapping,base.group_user,1,1,1,1

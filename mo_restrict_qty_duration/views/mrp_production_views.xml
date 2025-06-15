@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_mrp_customization_inherit_tree" model="ir.ui.view">
+            <field name="name">mrp.production.view.tree.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_start']" position="after">
+                    <field name="doctor" />
+                    <field name="patient" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mrp_customization_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.view.form.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='bom_div']" position="after">
+                    <label for="doctor"/>
+                    <div class='o_row' name="">
+                        <field name="doctor"/>
+                    </div>
+                    <label for="patient"/>
+                    <div class='o_row' name="">
+                        <field name="patient"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

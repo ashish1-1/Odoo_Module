@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="ow_customer_statement_report" name="Custom customer statement" inherit_id="l10n_account_customer_statements.customer_statements">
+        <xpath expr="//h2" position="replace">
+            <h2>RAPORT KLIENTI</h2>
+        </xpath>
+        <xpath expr="//table" position="replace">
+            <table class="table table-borderless text-nowrap">
+                                    <thead class="border border-dark-subtle">
+                                        <tr>
+                                            <th class="text-start border-start border-end border-dark-subtle" scope="col">Data</th>
+                                            <th class="text-start border-start border-end border-dark-subtle" scope="col">Veprimi</th>
+                                            <th class="text-start border-start border-end border-dark-subtle" scope="col">Afati pageses</th>
+                                            <th class="text-end border-start border-end border-dark-subtle" scope="col">Vlera</th>
+                                            <th class="text-end border-start border-end border-dark-subtle" scope="col">Balanca</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="border-bottom border-dark-subtle">
+                                        <tr t-foreach="partner_lines" t-as="line" t-att-class="'border-start border-end border-dark-subtle ' + ('border-bottom' if line_index == 0 else '')">
+                                            <td class="border-start border-end border-dark-subtle align-middle">
+                                                <span t-out="line['date']"/>
+                                            </td>
+                                            <td class="border-start border-end border-dark-subtle text-wrap">
+                                                <t t-if="line['move_type']">
+                                                    <small t-out="line['move_type']" class="text-muted"/><br/>
+                                                </t>
+                                                <span t-out="line['activity']"/>
+                                                <t t-if="line['reference']">
+                                                    <br/><small t-out="line['reference']" class="text-muted"/>
+                                                </t>
+                                            </td>
+                                            <td class="border-start border-end border-dark-subtle align-middle">
+                                                <span t-out="line['due_date']"/>
+                                            </td>
+                                            <td class="text-end border-start border-end border-dark-subtle align-middle">
+                                                <span t-out="line['amount']"/>
+                                            </td>
+                                            <td class="text-end border-start border-end border-dark-subtle align-middle">
+                                                <span t-out="line['balance']"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td class="border-top border-dark-subtle" colspan="5"/>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+        </xpath>
+        <xpath expr="//label" position="replace">
+            <label for="balance_due">Total: </label>
+        </xpath>
+
+    </template>
+
+</odoo>

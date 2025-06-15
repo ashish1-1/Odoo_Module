@@ -1,0 +1,23 @@
+{
+    "name": "Odoo CSV Connector",
+    "summary": """Odoo CSV Connector""",
+    "category": "",
+    "version": "17.0.1.0.0",
+    "sequence": 2,
+    "author": "",
+    "license": "LGPL-3",
+    "website": "",
+    "description": """Odoo CSV Connector""",
+    "depends":['ow_messages'],
+    "data": [
+        'security/ir.model.access.csv',
+        'views/csv_instance_view.xml',
+        # 'views/field_column_mapping_view.xml',
+        'views/columns.xml',
+        'views/menu.xml',
+    ],
+    # "images": ['static/description/banner.gif'],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+}

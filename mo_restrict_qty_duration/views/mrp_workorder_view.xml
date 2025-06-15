@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_mrp_workorder_tree" model="ir.ui.view">
+            <field name="name">mrp.production.work.order.tree.editable.inherit</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='workcenter_id']" position="before">
+                    <field name="delegated_to_id" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="mrp.mrp_workorder_todo" model="ir.actions.act_window">
+            <field name="context">{}</field>
+        </record>
+    </data>
+</odoo>

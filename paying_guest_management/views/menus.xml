@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem
+            id="pg_mgmt_menu"
+            name="PG Management"
+            sequence="10"
+            action="paying_guest_management.pg_mgmt_action"/>
+
+            <menuitem
+                id="dashboard_menu"
+                name="Dashboard"
+                parent="pg_mgmt_menu"
+                action=""
+                sequence="10"/>
+
+            <menuitem
+                id="customer_menu"
+                name="Customers"
+                action="account.res_partner_action_customer"
+                parent="pg_mgmt_menu"
+                sequence="20"/>
+
+            <menuitem
+                id="meal_plans_menu"
+                name="Meal Plans"
+                action="paying_guest_management.meal_plans_action"
+                parent="pg_mgmt_menu"
+                sequence="30"/>
+
+            <menuitem
+                id="rooms_menu"
+                name="Rooms"
+                parent="pg_mgmt_menu"
+                action=""
+                sequence="40"/>
+        
+
+    </data>
+</odoo>
